@@ -67,3 +67,6 @@ if __name__ == "__main__":
     #TODO
     # Main function -> call save_new_wines without if
     #
+
+
+    #During scraping let 
