@@ -30,55 +30,54 @@ class vin:
     --------------------------
     """
 
-   
-   
     #MANDATORY INFOS 
     # -> If missing will generate errors that will be stored
     # -> If need to use second selector // it will generate scrap report
     
     def __init__(self, response):
-        self.soup = BeautifulSoup(response.text, features="lxml")
-        self.set_attributes_to_default()
-        self.set_product_ref(response)      
+        #self.soup = BeautifulSoup(response.text, features="lxml")
+        #self.set_attributes_to_default()
+        #self.set_product_ref(response)      
         
         #Mandatory parameters Set
-        self.set_name() 
-        self.set_titles() 
-        self.set_alcool() 
-        self.set_color() 
-        self.set_vintage() 
-
-        #Is it a french wine or not 
-        if self.is_it_a_french_wine():
-           self.set_country(french=True)
-           self.set_region(french=True)
-           self.set_state(french=True)
-        else:
-           self.set_country()
-           self.set_region()
-           self.set_state()
-        
-        self.set_capacity() 
-        self.set_designation_of_origin() 
-        self.set_grape_variety() 
-        
-        self.set_tastes()
-        self.set_by_tastes()
-        self.set_smell()
-        self.set_mouthfeel()
-        self.set_service_temperature()
-        self.set_service()
-        self.set_conservation()
-        self.set_to_drink_until()
-        self.set_to_drink_as_from()
-        self.set_food_and_wine_matches()
-        
-        self.set_prices()
-        self.set_teaser()
-        self.set_resume()
-
-        self.set_image()
-        self.set_rewards()
+        #self.set_name() 
+        #self.set_titles() 
+        #self.set_alcool() 
+        #self.set_color() 
+        #self.set_vintage() 
+        #
+        ##Is it a french wine or not 
+        #if self.is_it_a_french_wine():
+        #   self.set_country(french=True)
+        #   self.set_region(french=True)
+        #   self.set_state(french=True)
+        #else:
+        #   self.set_country()
+        #   self.set_region()
+        #   self.set_state()
+        #
+        #self.set_capacity() 
+        #self.set_designation_of_origin() 
+        #self.set_grape_variety() 
+        #
+        #self.set_tastes()
+        #self.set_by_tastes()
+        #self.set_smell()
+        #self.set_mouthfeel()
+        #self.set_service_temperature()
+        #self.set_service()
+        #self.set_conservation()
+        #self.set_to_drink_until()
+        #self.set_to_drink_as_from()
+        #self.set_food_and_wine_matches()
+        #
+        #self.set_prices()
+        #self.set_teaser()
+        #self.set_resume()
+        #
+        #self.set_image()
+        #self.set_rewards()
+        return
                                                                                                                          
     ##### SETTERS #####
     def set_attributes_to_default(self) -> None:
@@ -104,7 +103,7 @@ class vin:
         self.rewards = {}
         return
 
-    def get_name(self):
+    def get_name(self)->str:        
         selector = self.selectors
         soup = self.soup
         try:
@@ -116,13 +115,10 @@ class vin:
             except IndexError:
                 self.set_error('name not found.')
                 self.name = False    
-        return name.strip() 
-    def set_name(self):
-        name = self.get_name()
-        if name == False or name == "":
-            self.name = False
-        else:
-            self.name = name
+        return name.strip()
+
+    def set_name(self, name):
+        self.name = name
         return
     
     def get_product_ref(self, response):
@@ -782,7 +778,6 @@ class vin:
         ref = self.ref if self.ref != False else "00000"
         product_name = self.name if self.name != False else link.replace('https://www.vinatis.com/', '').replace('.png', '')     
         image_name = f'{ref} - {product_name}' 
-        
         #3 - Check if this pattern exists in this the image folder 
         if path.exists(f'./wine_images/{image_name}.png'):
             return image_name

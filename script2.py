@@ -1,11 +1,17 @@
 import re
-from product import data
+from product import data, vin
 from service import getRefInURL
+from scrapper import scrapper
+import requests
+
 def main():
-    feature = 'hello'
-    bonjour = 'https://www.vinatis.com/39420-pinot-noir-2018-bread-and-butter'
+    url = "https://www.vinatis.com/42591-la-cote-2019-chateau-de-la-negly"
+    scrap = scrapper(url)
+    wine = vin(scrap.response)
+    wine.set_name(scrap.scrapName())
+    print(wine.name)
     #eturn re.compile(fr".*?{feature}.*?", bonjour)
-    u = getRefInURL(bonjour)
+
 
     return True
     # #x = list(filter(lambda v: re.match(r'.+% vol', v), test))
